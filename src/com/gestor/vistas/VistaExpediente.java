@@ -53,6 +53,9 @@ public class VistaExpediente extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDescripcionDenuncia = new javax.swing.JTextArea();
         txtFechaDelito = new com.toedter.calendar.JDateChooser();
+        menuBar = new javax.swing.JMenuBar();
+        menuOpciones = new javax.swing.JMenu();
+        itemPersonas = new javax.swing.JMenuItem();
 
         jTextField2.setText("jTextField2");
 
@@ -143,13 +146,27 @@ public class VistaExpediente extends javax.swing.JInternalFrame {
                         .addComponent(lblCartelDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                         .addComponent(btnGenerarExpediente))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtFechaDelito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
+
+        menuOpciones.setText("Opciones");
+
+        itemPersonas.setText("Administrar personas");
+        itemPersonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemPersonasActionPerformed(evt);
+            }
+        });
+        menuOpciones.add(itemPersonas);
+
+        menuBar.add(menuOpciones);
+
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,14 +189,20 @@ public class VistaExpediente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_comboDelitoActionPerformed
 
     private void btnGenerarExpedienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarExpedienteActionPerformed
-        // TODO add your handling code here:
+            
     }//GEN-LAST:event_btnGenerarExpedienteActionPerformed
+
+    private void itemPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemPersonasActionPerformed
+        VentanaPrincipal.ventanaPersonas.show();
+        
+    }//GEN-LAST:event_itemPersonasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnGenerarExpediente;
     public static javax.swing.JComboBox comboDelito;
     public static javax.swing.JComboBox comboPersona;
+    private javax.swing.JMenuItem itemPersonas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField2;
@@ -188,6 +211,8 @@ public class VistaExpediente extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblFechaDelito;
     private javax.swing.JLabel lblIcono;
     private javax.swing.JLabel lblPersona;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuOpciones;
     public static javax.swing.JTextArea txtDescripcionDenuncia;
     public static com.toedter.calendar.JDateChooser txtFechaDelito;
     // End of variables declaration//GEN-END:variables

@@ -15,6 +15,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
 //declaramos las ventanas que contiene la ventana padre
     public static VistaLogin login;
+    public static VistaPersonas ventanaPersonas;
 
     //declaramos el controlador que manejara los eventos
     private ControladorPrincipal controlador = new ControladorPrincipal();
@@ -28,14 +29,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         login = new VistaLogin();
 
         vistaExpediente = new VistaExpediente();
+        ventanaPersonas = new VistaPersonas();
 
         //agregamos el controlador al login
         login.btnIngresar.addActionListener(controlador);
         vistaExpediente.btnGenerarExpediente.addActionListener(controlador);
 
         escritorio.add(login);
+        escritorio.add(ventanaPersonas);
         escritorio.add(vistaExpediente);
         login.show();
+ 
 
     }
 

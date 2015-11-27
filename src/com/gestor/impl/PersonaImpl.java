@@ -11,8 +11,11 @@ import com.gestor.util.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -52,14 +55,123 @@ public class PersonaImpl implements PersonaDAO {
         return listarPersonas;
     }
 
-    
-    
-    public static void main(String... a){
-        
-        PersonaDAO service = new PersonaImpl();
-        List<Persona> personas = service.listar();
-        for (Persona persona : personas) {
-            System.out.println(persona);
+    @Override
+    public void eliminar(long id) throws Exception {
+        PreparedStatement pstm = null;
+        try {
+            String sql = "DELETE FROM personas WHERE dni = ?";
+            Connection conexion = Conexion.getConexion();
+            pstm = conexion.prepareStatement(sql);
+            pstm.setLong(1, id);
+            int registros = pstm.executeUpdate();
+            if (registros != 1) {
+                throw new RuntimeException("Error se afectaron varios registros");
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException("No pude eliminar la persoba"
+                    + " con id " + id + " -- " + e);
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
         }
+
     }
+
+    @Override
+    public void actualizar(Persona persona) throws Exception {
+
+        PreparedStatement pstm = null;
+        try {
+            String sql = "UPDATE personas SET nombre = ? , apellido = ? , telefono = ? , direccion = ? WHERE dni = ?";
+            Connection conexion = Conexion.getConexion();
+            pstm = conexion.prepareStatement(sql);
+            pstm.setString(1, persona.getNombre());
+            pstm.setString(2, persona.getApellido());
+            pstm.setString(3, persona.getTelefono());
+            pstm.setString(4, persona.getDireccion());
+            pstm.setLong(5, persona.getDni());
+
+            int registros = pstm.executeUpdate();
+            if (registros != 1) {
+                throw new RuntimeException("Error se afectaron varios registros");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("No pude actualizar la persona " + persona + " --" + e);
+        } finally {
+            try {
+                if (pstm != null) {
+                    pstm.close();
+                }
+
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+
+    }
+
+    @Override
+    public void insertar(Persona persona) throws Exception {
+
+        PreparedStatement pstm = null;
+        try {
+            String sql = "INSERT INTO personas (dni, nombre, apellido,telefono,direccion) VALUES (?,?,?,?,?)";
+            Connection conexion = Conexion.getConexion();
+            pstm = conexion.prepareStatement(sql);
+            pstm.setLong(1, persona.getDni());
+            pstm.setString(2, persona.getNombre());
+            pstm.setString(3, persona.getApellido());
+            pstm.setString(4, persona.getTelefono());
+            pstm.setString(5, persona.getDireccion());
+            int registros = pstm.executeUpdate();
+            if (registros != 1) {
+                throw new RuntimeException("Error se afectaron " + registros + " registros");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error insertando PERSONA" + e);
+        } finally {
+            if (pstm != null) {
+                try {
+                    pstm.close();
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+        }
+
+    }
+    
+    
+    //Test metodos
+    public static void main(String... a){
+        Persona persona = new Persona(11456465, "NOMBRE ACTUALIZADO", "Prueba apellido", "Prueba telefono","DIRECCION ACTUALIZADA");
+        PersonaImpl servicio = new PersonaImpl();
+        try {
+          //  servicio.insertar(persona);
+          //  servicio.actualizar(persona);
+          //  servicio.eliminar(11456465);
+  /*          
+            List<Persona> personas = servicio.listar();
+            for (Persona persona1 : personas) {
+                System.out.println("Persona: "+persona1);
+            }
+    */        
+        } catch (Exception ex) {
+            Logger.getLogger(PersonaImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
+    
+    
+    
 }
