@@ -1,6 +1,6 @@
 package com.gestor.vistas;
 
-import com.empresa.util.UTabla;
+import com.gestor.util.UTabla;
 import com.gestor.controlador.ControladorPrincipal;
 import javax.swing.JButton;
 import javax.swing.JLabel;

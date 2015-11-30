@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gestor.impl;
 
 import com.gestor.daos.ExpedienteDAO;
@@ -13,6 +8,12 @@ import java.sql.Connection;
 
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 public class ExpedienteImpl implements ExpedienteDAO{
@@ -47,5 +48,52 @@ public class ExpedienteImpl implements ExpedienteDAO{
         }
     }
 
+    @Override
+    public List<Expediente> listarXfecha(Date fechaInicio, Date fechaFin) {
+        Connection conexion = Conexion.getConexion();
+        PreparedStatement pstm=null;
+        ResultSet rs=null;
+        List<Expediente> expedientes = new ArrayList<>();
+        
+        try {
+            String sql = "SELECT * FROM expedientes WHERE fecha_hecho BETWEEN ? AND ?";
+            pstm = conexion.prepareStatement(sql);
+            pstm.setDate(1, Fecha.getCurrentDate(fechaInicio));
+            pstm.setDate(2, Fecha.getCurrentDate(fechaFin));
+            rs = pstm.executeQuery();
+            Expediente expediente;
+            while(rs.next()){
+                expediente = new  Expediente();
+                expediente.setNumeroExpediente(rs.getLong("nro_expte"));
+                expediente.setIdPersona(rs.getLong("id_persona"));
+                expediente.setFechaDenuncia(rs.getDate("fecha_denuncia"));
+                expediente.setFechaHecho(rs.getDate("fecha_hecho"));
+                expediente.setCodDelito(rs.getLong("cod_delito"));
+                expediente.setDescripcion(rs.getString("descripcion"));
+                expediente.setIdEstado(rs.getLong("id_estado"));
+                expediente.setCodOperador(rs.getLong("cod_operador"));
+                expedientes.add(expediente);
+            
+            }
+            
+            
+        } catch (Exception e) {
+            throw new RuntimeException("Error listando expedientes x fecha "+e);
+        }
+        
+        
+        return expedientes;
+        
+    }
+
+   
+   
     
+     public static Date parseDate(String date) {
+     try {
+         return new SimpleDateFormat("yyyy-mm-dd").parse(date);
+     } catch (ParseException e) {
+         return null;
+     }
+  }
 }

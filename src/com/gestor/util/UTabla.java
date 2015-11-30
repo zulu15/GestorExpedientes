@@ -1,4 +1,4 @@
-package com.empresa.util;
+package com.gestor.util;
 
 import com.gestor.util.Conexion;
 import java.sql.Connection;

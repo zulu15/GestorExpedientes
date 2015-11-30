@@ -5,10 +5,7 @@
  */
 package com.gestor.util;
 
-/**
- *
- * @author joaquin14
- */
+
 public class Fecha {
 
     public static java.sql.Date getCurrentDate() {

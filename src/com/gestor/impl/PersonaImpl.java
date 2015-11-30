@@ -148,30 +148,5 @@ public class PersonaImpl implements PersonaDAO {
         }
 
     }
-    
-    
-    //Test metodos
-    public static void main(String... a){
-        Persona persona = new Persona(11456465, "NOMBRE ACTUALIZADO", "Prueba apellido", "Prueba telefono","DIRECCION ACTUALIZADA");
-        PersonaImpl servicio = new PersonaImpl();
-        try {
-          //  servicio.insertar(persona);
-          //  servicio.actualizar(persona);
-          //  servicio.eliminar(11456465);
-  /*          
-            List<Persona> personas = servicio.listar();
-            for (Persona persona1 : personas) {
-                System.out.println("Persona: "+persona1);
-            }
-    */        
-        } catch (Exception ex) {
-            Logger.getLogger(PersonaImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    
-    
-    
-    
-    
+
 }

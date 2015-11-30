@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PersonaDAO {
 
-    public List<Persona> listar();
+        public List<Persona> listar();
 
 	public void eliminar(long id) throws Exception;
 

@@ -53,11 +53,6 @@ public class Conexion {
         return conexion;
     }
     
-    public static void main (String[] args){
-        
-        //le pedimos a la clase quelevante la conexion y la pasea  a nuestra variable
-    Connection conexion =Conexion.getConexion();
-    
-    }
+
     
 }

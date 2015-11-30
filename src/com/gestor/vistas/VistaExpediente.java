@@ -11,9 +11,13 @@ import com.gestor.impl.DelitoImpl;
 import com.gestor.impl.PersonaImpl;
 import com.gestor.modelo.Delito;
 import com.gestor.modelo.Persona;
+import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,6 +33,7 @@ public class VistaExpediente extends javax.swing.JInternalFrame {
         setClosable(true);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         llenarCombos();
+        
     }
 
     /**
@@ -55,6 +60,7 @@ public class VistaExpediente extends javax.swing.JInternalFrame {
         txtFechaDelito = new com.toedter.calendar.JDateChooser();
         menuBar = new javax.swing.JMenuBar();
         menuOpciones = new javax.swing.JMenu();
+        itemExpedientesBusqueda = new javax.swing.JMenuItem();
         itemPersonas = new javax.swing.JMenuItem();
 
         jTextField2.setText("jTextField2");
@@ -156,6 +162,14 @@ public class VistaExpediente extends javax.swing.JInternalFrame {
 
         menuOpciones.setText("Opciones");
 
+        itemExpedientesBusqueda.setText("Buscar expedientes");
+        itemExpedientesBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemExpedientesBusquedaActionPerformed(evt);
+            }
+        });
+        menuOpciones.add(itemExpedientesBusqueda);
+
         itemPersonas.setText("Administrar personas");
         itemPersonas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -193,15 +207,33 @@ public class VistaExpediente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnGenerarExpedienteActionPerformed
 
     private void itemPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemPersonasActionPerformed
-        VentanaPrincipal.ventanaPersonas.show();
-        
+      
+        try {
+         this.setIcon(true);
+           VentanaPrincipal.ventanaPersonas.show();
+
+        } catch (PropertyVetoException ex) {
+            JOptionPane.showMessageDialog(null, "Error abriendo ventana de personas por fecha");
+        } 
     }//GEN-LAST:event_itemPersonasActionPerformed
+
+    private void itemExpedientesBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemExpedientesBusquedaActionPerformed
+        try {
+         this.setIcon(true);
+         VentanaPrincipal.ventanaExpedientesFecha.show();
+        } catch (PropertyVetoException ex) {
+            JOptionPane.showMessageDialog(null, "Error abriendo ventana de expedientes por fecha");
+        }
+       
+       
+    }//GEN-LAST:event_itemExpedientesBusquedaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JButton btnGenerarExpediente;
     public static javax.swing.JComboBox comboDelito;
     public static javax.swing.JComboBox comboPersona;
+    private javax.swing.JMenuItem itemExpedientesBusqueda;
     private javax.swing.JMenuItem itemPersonas;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;

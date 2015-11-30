@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gestor.controlador;
 
-import com.empresa.util.UTabla;
+import com.gestor.util.UTabla;
 import com.gestor.daos.ExpedienteDAO;
 import com.gestor.daos.OperadorDAO;
 import com.gestor.daos.PersonaDAO;
@@ -67,7 +62,6 @@ public class ControladorPrincipal implements ActionListener, MouseListener {
 
                 } else {
                     VentanaPrincipal.vistaExpediente.setVisible(false);
-                    VentanaPrincipal.vistaExpediente.dispose();
                     VistaLogin.lblErrorLogin.setText("ERROR USUARIO O CONTRASEÑA INCORRECTAS");
 
                 }
